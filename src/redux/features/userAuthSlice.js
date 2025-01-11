@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 const initialState = {
     authUser: null,
     isSigningUp: false,
+    isUpdatingProfile: false,
     isLoggingIn: false,
     isCheckingAuth: true,
 };
@@ -17,7 +18,7 @@ export const loginUser = createAsyncThunk(
             const response = await axiosInstance.post('/auth/login', credentials);
             toast.success(response.data.message);
             console.log(response.data);
-            return response.data;
+            return response.data.data.user;
         } catch (error) {
             toast.error(error.response?.data?.message || 'Login failed');
             return thunkAPI.rejectWithValue(error.response?.data?.message || 'Login failed');
@@ -63,20 +64,33 @@ export const checkAuth = createAsyncThunk(
             // await axiosInstance.get('/auth/logout');
             const response = await axiosInstance.get('/auth/check-auth');
             // console.log(response.data);
-            return response.data; 
+            return response.data.data; 
         } catch (error) {
             if (error.response?.data?.message === 'Invalid Access Token') {
                 try {
                     const refreshResponse = await axiosInstance.post('/auth/refresh-token');
 
                     const retryResponse = await axiosInstance.get('/auth/check-auth');
-                    return retryResponse.data;
+                    return retryResponse.data.data;
                 } catch (refreshError) {
                     return thunkAPI.rejectWithValue(refreshError.response?.data?.message || 'Token refresh failed');
                 }
             }
 
             return thunkAPI.rejectWithValue(error.response?.data?.message || 'Auth check failed');
+        }
+    }
+);
+export const updateProfile = createAsyncThunk(
+    'userAuth/updateProfile',
+    async (profilePic, thunkAPI) => {
+        try {
+            const response = await axiosInstance.post('/auth/update-profile', profilePic);
+            toast.success(response.data.message);
+            return response.data;
+        } catch (error) {
+            toast.error(error.response?.data?.message || 'Profile update failed');
+            return thunkAPI.rejectWithValue(error.response?.data?.message || 'Profile update failed');
         }
     }
 );
@@ -140,6 +154,19 @@ const userAuthSlice = createSlice({
             .addCase(logoutUser.rejected, (state) => {
                 state.isCheckingAuth = false;
             });
+        
+        builder
+            .addCase(updateProfile.pending, (state) => {
+                state.isUpdatingProfile = true;
+            })
+            .addCase(updateProfile.fulfilled, (state, action) => {
+                state.isUpdatingProfile = false;
+                state.authUser = action.payload;
+            })
+            .addCase(updateProfile.rejected, (state) => {
+                state.isUpdatingProfile = false;
+            });
+
 
     }
 });
