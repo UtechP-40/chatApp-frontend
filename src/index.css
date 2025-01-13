@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
+.dfdfsd{
+  color: rgb(85, 28, 142);
+  color: rgb(53, 51, 51);
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

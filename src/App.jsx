@@ -18,6 +18,8 @@ function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {authUser,isCheckingAuth} = useSelector(store=>store.userAuth)
+  const {theme} = useSelector(store=>store.userTheme)
+
   // console.log(authUser);
   useEffect(()=>{
     dispatch(checkAuth())
@@ -41,7 +43,7 @@ function App() {
   }
  
   return (
-    <div>
+    <div data-theme={theme}>
       <Navbar />
       <Routes>
         <Route path="/" element={authUser?<HomePage />:<Navigate to="/login" />} />

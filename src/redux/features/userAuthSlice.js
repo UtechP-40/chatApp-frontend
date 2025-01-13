@@ -1,14 +1,18 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { axiosInstance } from './../../lib/axios';
 import toast from 'react-hot-toast';
+import {io} from "socket.io-client"
+// import { connect, disconnect } from 'mongoose';
 
-
+const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:80";
 const initialState = {
     authUser: null,
     isSigningUp: false,
     isUpdatingProfile: false,
     isLoggingIn: false,
     isCheckingAuth: true,
+    onlineUsers:[],
+    socket:null
 };
 
 export const loginUser = createAsyncThunk(
@@ -105,6 +109,26 @@ const userAuthSlice = createSlice({
             state.authUser = null;
             state.isCheckingAuth = false;
         },
+        connectSocket(state){
+            // state.socket = io(BASE_URL)
+            if(!state.authUser || state.socket?.connected) return
+            const socket = io(BASE_URL,{
+                query:{
+                    authUser:state.authUser._id
+                }
+            })
+            socket.connect()
+            socket.on("getOnlineUsers", (userIds) => {
+                state.onlineUsers = userIds
+              });
+              state.socket = socket
+        },
+
+        disconnectSocket(state){
+            if(state.socket?.connected){
+                state.socket.disconnect()
+            }
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -172,6 +196,6 @@ const userAuthSlice = createSlice({
 });
 
 
-export const { logoutUserAction } = userAuthSlice.actions;
+export const { logoutUserAction,connectSocket,disconnectSocket } = userAuthSlice.actions;
 
 export default userAuthSlice.reducer;
