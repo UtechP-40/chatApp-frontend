@@ -9,7 +9,7 @@ import ProfilePage from './pages/ProfilePage'
 
 import { useEffect } from 'react'
 import {useDispatch,useSelector} from "react-redux"
-import { checkAuth } from './redux/features/userAuthSlice'
+import { checkAuth,connectSocket,disconnectSocket} from './redux/features/userAuthSlice'
 import {Toaster} from 'react-hot-toast'
 import {Loader} from "lucide-react"
 
@@ -23,6 +23,11 @@ function App() {
   // console.log(authUser);
   useEffect(()=>{
     dispatch(checkAuth())
+    dispatch(connectSocket())
+    
+    return ()=>{
+      dispatch(disconnectSocket())
+    }
     
   }
   ,[dispatch])

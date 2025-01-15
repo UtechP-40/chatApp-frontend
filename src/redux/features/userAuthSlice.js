@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import {io} from "socket.io-client"
 // import { connect, disconnect } from 'mongoose';
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:80";
+const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:80" : import.meta.env.VITE_BASE_URL;
 const initialState = {
     authUser: null,
     isSigningUp: false,
@@ -70,7 +70,7 @@ export const checkAuth = createAsyncThunk(
             // console.log(response.data);
             return response.data.data; 
         } catch (error) {
-            if (error.response?.data?.message === 'Invalid Access Token') {
+            // if (error.response?.data?.message === 'Invalid Access Token') {
                 try {
                     const refreshResponse = await axiosInstance.post('/auth/refresh-token');
 
@@ -78,10 +78,11 @@ export const checkAuth = createAsyncThunk(
                     return retryResponse.data.data;
                 } catch (refreshError) {
                     return thunkAPI.rejectWithValue(refreshError.response?.data?.message || 'Token refresh failed');
+                    // return thunkAPI.rejectWithValue(error.response?.data?.message || 'Auth check failed');
                 }
-            }
+            // }
 
-            return thunkAPI.rejectWithValue(error.response?.data?.message || 'Auth check failed');
+            
         }
     }
 );

@@ -26,9 +26,10 @@ export const getMessages = createAsyncThunk('chat/getMessages', async (userId,th
 }
 );
 
-export const sendMessage = createAsyncThunk('chat/sendMessage', async ({userId, text,image},thunkAPI) => {
+export const sendMessage = createAsyncThunk('chat/sendMessage', async (formData,thunkAPI) => {
     try {
-        const response = await axiosInstance.post(`/message/send/${userId}`, {text,image});
+      // console.log(image);
+        const response = await axiosInstance.post(`/message/send/${thunkAPI.getState().chat.selectedUser._id}`, formData);
     return response.data.data;
     } catch (error) {
         toast.error(error.response?.data?.message || 'Failed to send message');
