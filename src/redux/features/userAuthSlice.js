@@ -1,18 +1,30 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from './../../lib/axios';
 import toast from 'react-hot-toast';
-import {io} from "socket.io-client"
-// import { connect, disconnect } from 'mongoose';
+import { io } from 'socket.io-client';
 
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:80" : import.meta.env.VITE_BASE_URL;
+const BASE_URL = import.meta.env.MODE === "development"
+    ? "http://localhost:80"
+    : import.meta.env.VITE_BASE_URL;
+
 const initialState = {
     authUser: null,
     isSigningUp: false,
     isUpdatingProfile: false,
     isLoggingIn: false,
     isCheckingAuth: true,
-    onlineUsers:[],
-    socket:null
+    onlineUsers: [],
+    socket: null
+};
+
+const saveTokensToLocalStorage = (accessToken, refreshToken) => {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+};
+
+const clearTokensFromLocalStorage = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
 };
 
 export const loginUser = createAsyncThunk(
@@ -20,9 +32,10 @@ export const loginUser = createAsyncThunk(
     async (credentials, thunkAPI) => {
         try {
             const response = await axiosInstance.post('/auth/login', credentials);
+            const { accessToken, refreshToken, user } = response.data.data;
+            saveTokensToLocalStorage(accessToken, refreshToken);
             toast.success(response.data.message);
-            console.log(response.data);
-            return response.data.data.user;
+            return user;
         } catch (error) {
             toast.error(error.response?.data?.message || 'Login failed');
             return thunkAPI.rejectWithValue(error.response?.data?.message || 'Login failed');
@@ -35,7 +48,7 @@ export const logoutUser = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const response = await axiosInstance.post('/auth/logout');
-            console.log(response.data);
+            clearTokensFromLocalStorage();
             toast.success(response.data.message);
             return response.data;
         } catch (error) {
@@ -45,14 +58,15 @@ export const logoutUser = createAsyncThunk(
     }
 );
 
-
 export const signupUser = createAsyncThunk(
     'userAuth/signupUser',
     async (userDetails, thunkAPI) => {
         try {
             const response = await axiosInstance.post('/auth/signup', userDetails);
+            const { accessToken, refreshToken, user } = response.data.data;
+            saveTokensToLocalStorage(accessToken, refreshToken);
             toast.success(response.data.message);
-            return response.data;
+            return user;
         } catch (error) {
             toast.error(error.response?.data?.message || 'Signup failed');
             return thunkAPI.rejectWithValue(error.response?.data?.message || 'Signup failed');
@@ -60,32 +74,28 @@ export const signupUser = createAsyncThunk(
     }
 );
 
-
 export const checkAuth = createAsyncThunk(
     'userAuth/checkAuth',
     async (_, thunkAPI) => {
         try {
-            // await axiosInstance.get('/auth/logout');
             const response = await axiosInstance.get('/auth/check-auth');
-            // console.log(response.data);
-            return response.data.data; 
+            return response.data.data;
         } catch (error) {
-            // if (error.response?.data?.message === 'Invalid Access Token') {
-                try {
-                    const refreshResponse = await axiosInstance.post('/auth/refresh-token');
+            try {
+                const refreshResponse = await axiosInstance.post('/auth/refresh-token');
+                const { accessToken, refreshToken } = refreshResponse.data.data;
+                saveTokensToLocalStorage(accessToken, refreshToken);
 
-                    const retryResponse = await axiosInstance.get('/auth/check-auth');
-                    return retryResponse.data.data;
-                } catch (refreshError) {
-                    return thunkAPI.rejectWithValue(refreshError.response?.data?.message || 'Token refresh failed');
-                    // return thunkAPI.rejectWithValue(error.response?.data?.message || 'Auth check failed');
-                }
-            // }
-
-            
+                const retryResponse = await axiosInstance.get('/auth/check-auth');
+                return retryResponse.data.data;
+            } catch (refreshError) {
+                clearTokensFromLocalStorage();
+                return thunkAPI.rejectWithValue(refreshError.response?.data?.message || 'Token refresh failed');
+            }
         }
     }
 );
+
 export const updateProfile = createAsyncThunk(
     'userAuth/updateProfile',
     async (profilePic, thunkAPI) => {
@@ -100,8 +110,6 @@ export const updateProfile = createAsyncThunk(
     }
 );
 
-
-
 const userAuthSlice = createSlice({
     name: 'userAuth',
     initialState,
@@ -109,25 +117,24 @@ const userAuthSlice = createSlice({
         logoutUserAction(state) {
             state.authUser = null;
             state.isCheckingAuth = false;
+            clearTokensFromLocalStorage();
         },
-        connectSocket(state){
-            // state.socket = io(BASE_URL)
-            if(!state.authUser || state.socket?.connected) return
-            const socket = io(BASE_URL,{
-                query:{
-                    authUser:state.authUser._id
+        connectSocket(state) {
+            if (!state.authUser || state.socket?.connected) return;
+            const socket = io(BASE_URL, {
+                query: {
+                    authUser: state.authUser._id
                 }
-            })
-            socket.connect()
+            });
+            socket.connect();
             socket.on("getOnlineUsers", (userIds) => {
-                state.onlineUsers = userIds
-              });
-              state.socket = socket
+                state.onlineUsers = userIds;
+            });
+            state.socket = socket;
         },
-
-        disconnectSocket(state){
-            if(state.socket?.connected){
-                state.socket.disconnect()
+        disconnectSocket(state) {
+            if (state.socket?.connected) {
+                state.socket.disconnect();
             }
         }
     },
@@ -179,7 +186,7 @@ const userAuthSlice = createSlice({
             .addCase(logoutUser.rejected, (state) => {
                 state.isCheckingAuth = false;
             });
-        
+
         builder
             .addCase(updateProfile.pending, (state) => {
                 state.isUpdatingProfile = true;
@@ -191,12 +198,9 @@ const userAuthSlice = createSlice({
             .addCase(updateProfile.rejected, (state) => {
                 state.isUpdatingProfile = false;
             });
-
-
     }
 });
 
-
-export const { logoutUserAction,connectSocket,disconnectSocket } = userAuthSlice.actions;
+export const { logoutUserAction, connectSocket, disconnectSocket } = userAuthSlice.actions;
 
 export default userAuthSlice.reducer;
