@@ -1,65 +1,82 @@
-import React from 'react'
-import Navbar from './Components/Navbar'
-import { Routes, Route,useNavigate,Navigate } from 'react-router-dom'
-import HomePage from './pages/HomePage'
-import SignUpPage from './pages/SignUpPage'
-import LoginPage from './pages/LoginPage'
-import SettingsPage from './pages/SettingsPage'
-import ProfilePage from './pages/ProfilePage'
+import React, { useEffect } from 'react';
+import Navbar from './Components/Navbar';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { checkAuth, connectSocket, disconnectSocket } from './redux/features/userAuthSlice';
+import { Toaster } from 'react-hot-toast';
+import { Loader } from "lucide-react";
 
-import { useEffect } from 'react'
-import {useDispatch,useSelector} from "react-redux"
-import { checkAuth,connectSocket,disconnectSocket} from './redux/features/userAuthSlice'
-import {Toaster} from 'react-hot-toast'
-import {Loader} from "lucide-react"
+// Pages
+import HomePage from './pages/HomePage';
+import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
+import SettingsPage from './pages/SettingsPage';
+import Themes from './pages/Themes';
+import Language from './pages/Language';
+import ManageFriends from './pages/ManageFriends';
+import PrivacySettings from './pages/PrivacySettings';
+import Notifications from './pages/Notifications';
+// import DownloadData from './pages/DownloadData';
+import HelpSupport from './pages/HelpSupport';
+import Accessibility from './pages/Accessibility';
+import ProfilePage from './pages/ProfilePage';
+import Search from './pages/Search';
 
-function App() {
-  // console.log(axiosInstance);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const {authUser,isCheckingAuth} = useSelector(store=>store.userAuth)
-  const {theme} = useSelector(store=>store.userTheme)
+const App = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { authUser, isCheckingAuth } = useSelector(store => store.userAuth);
+  const { theme } = useSelector(store => store.userTheme);
 
-  // console.log(authUser);
-  useEffect(()=>{
-    dispatch(checkAuth())
-    dispatch(connectSocket())
-    
-    return ()=>{
-      dispatch(disconnectSocket())
-    }
-    
-  }
-  ,[dispatch])
-  console.log(authUser)
-  // useEffect(() => {
-  //   // Redirect to login if the user is not authenticated
-  //   if (!isCheckingAuth && !authUser) {
-  //     navigate('/login');
-  //   }
-  // }, [authUser, isCheckingAuth, navigate]);
-  // console.log(isCheckingAuth,authUser);
-  if(isCheckingAuth && !authUser){
+  useEffect(() => {
+    dispatch(checkAuth());
+    dispatch(connectSocket());
+
+    return () => {
+      dispatch(disconnectSocket());
+    };
+  }, [dispatch]);
+
+  if (isCheckingAuth && !authUser) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader className='size-10 animate-spin' />
       </div>
-    )
+    );
   }
- 
+
+  const routes = [
+    { path: "/", element: <HomePage />, restricted: true },
+    { path: "/search", element: <Search />, restricted: true },
+    { path: "/signup", element: <SignUpPage />, restricted: false },
+    { path: "/login", element: <LoginPage />, restricted: false },
+    { path: "/settings", element: <SettingsPage />, restricted: true },
+    { path: "/settings/theme", element: <Themes />, restricted: true },
+    { path: "/settings/language", element: <Language />, restricted: true },
+    { path: "/friends", element: <ManageFriends />, restricted: true },
+    { path: "/settings/privacy", element: <PrivacySettings />, restricted: true },
+    { path: "/settings/notifications", element: <Notifications />, restricted: true },
+    // { path: "/settings/download-data", element: <DownloadData />, restricted: true },
+    { path: "/settings/help", element: <HelpSupport />, restricted: true },
+    { path: "/settings/accessibility", element: <Accessibility />, restricted: true },
+    { path: "/profile", element: <ProfilePage />, restricted: true },
+  ];
+
   return (
     <div data-theme={theme}>
       <Navbar />
       <Routes>
-        <Route path="/" element={authUser?<HomePage />:<Navigate to="/login" />} />
-        <Route path="/signup" element={!authUser?<SignUpPage />:<Navigate to="/" />} />
-        <Route path="/login" element={!authUser?<LoginPage />:<Navigate to="/"/>} />
-        <Route path="/settings" element={authUser?<SettingsPage />:<Navigate to="/login" />} />
-        <Route path="/profile" element={authUser?<ProfilePage />:<Navigate to="/login" />} />
+        {routes.map(({ path, element, restricted }) => (
+          <Route
+            key={path}
+            path={path}
+            element={restricted && !authUser ? <Navigate to="/login" /> : element}
+          />
+        ))}
       </Routes>
       <Toaster />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

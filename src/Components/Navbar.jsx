@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
 import { logoutUser } from '../redux/features/userAuthSlice'
-import { LogOut, MessageSquare, Settings, User } from "lucide-react";
+import { LogOut, MessageSquare, Settings,Contact, User ,Search} from "lucide-react";
 function Navbar() {
   const dispatch = useDispatch()
   const {authUser} = useSelector(store=>store.userAuth)
@@ -23,6 +23,19 @@ function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
+            {authUser&&(
+              <>
+              <Link to={"/search"} className={`btn btn-sm gap-2`}>
+              <Search className="size-5" />
+              <span className="hidden sm:inline">Search</span>
+            </Link>
+            <Link to={"/friends"} className={`btn btn-sm gap-2`}>
+            <Contact className="size-5" />
+            {/* <Contact /> */}
+            <span className="hidden sm:inline">Search</span>
+          </Link>
+          </>
+            )}
             <Link
               to={"/settings"}
               className={`
@@ -40,6 +53,8 @@ function Navbar() {
                   <User className="size-5" />
                   <span className="hidden sm:inline">Profile</span>
                 </Link>
+                {/* <Search /> */}
+                
 
                 <button className="flex gap-2 items-center" onClick={()=>dispatch(logoutUser())}>
                   <LogOut className="size-5" />
@@ -55,3 +70,6 @@ function Navbar() {
 }
 
 export default Navbar
+
+
+{/* <Handshake /> */}

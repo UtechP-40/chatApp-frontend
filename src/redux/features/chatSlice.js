@@ -33,6 +33,7 @@ export const getUsers = createAsyncThunk('chat/getUsers', async (_, thunkAPI) =>
   }
 });
 
+
 export const getMessages = createAsyncThunk('chat/getMessages', async (userId, thunkAPI) => {
   try {
     const response = await axiosInstance.get(`/message/${userId}`, addAuthHeaders());
@@ -45,13 +46,13 @@ export const getMessages = createAsyncThunk('chat/getMessages', async (userId, t
 
 export const sendMessage = createAsyncThunk('chat/sendMessage', async (formData, thunkAPI) => {
   try {
-    const selectedUser = thunkAPI.getState().chat.selectedUser;
+    const selectedUser = thunkAPI.getState().friends.selectedUser;
     if (!selectedUser) {
       throw new Error('No user selected');
     }
 
     const response = await axiosInstance.post(
-      `/message/send/${selectedUser._id}`,
+      `/message/send/${selectedUser.friend._id}`,
       formData,
       addAuthHeaders()
     );

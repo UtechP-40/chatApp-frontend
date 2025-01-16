@@ -5,7 +5,7 @@ import NoChatSelected from '../Components/NoChatSelected';
 import ChatContainer from '../Components/ChatContainer';
 
 function HomePage() {
-  const {selectedUser} = useSelector((state) => state.chat);
+  const {selectedUser} = useSelector((state) => state.friends);
   // console.log("hello");
   return (
     <div className="h-screen bg-base-200">

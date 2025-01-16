@@ -8,13 +8,14 @@ import { formatMessageTime } from "../lib/utils.js";
 
 const ChatContainer = () => {
   const dispatch = useDispatch();
-  const {selectedUser, messages, isMessagesLoading} = useSelector((state) => state.chat);
+  const { messages, isMessagesLoading} = useSelector((state) => state.chat);
+  const {selectedUser} = useSelector(state=>state.friends)
   const {authUser,socket} = useSelector((state) => state.userAuth);
   const messageEndRef = useRef(null);
-
+console.log(selectedUser)
   useEffect(() => {
     if (selectedUser) {
-      dispatch(getMessages(selectedUser._id));
+      dispatch(getMessages(selectedUser.friend._id));
       dispatch(subscribeToMessages({socket}));
       return () => {
         dispatch(unsubscribeFromMessages({socket}));
@@ -77,7 +78,7 @@ const ChatContainer = () => {
                   className="sm:max-w-[200px] rounded-md mb-2"
                 />
               )}
-              {message.text && <p>{message.text}</p>}
+              {message.text && <p className="whitespace-normal break-words">{message.text}</p>}
             </div>
           </div>
         ))}
