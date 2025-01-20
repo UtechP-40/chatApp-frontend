@@ -99,6 +99,9 @@ export const checkAuth = createAsyncThunk(
             try {
                 const refreshResponse = await axiosInstance.post('/auth/refresh-token');
                 const { accessToken, refreshToken } = refreshResponse.data.data;
+                if(!refreshToken || !accessToken){
+                    throw new Error("User Needs to login")
+                }
                 saveTokensToLocalStorage(accessToken, refreshToken);
                 const retryResponse = await axiosInstance.get('/auth/check-auth');
                 return retryResponse.data.data;
