@@ -9,18 +9,22 @@ import { useTranslation } from "react-i18next";
 function LoginPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const { isLoggingIn } = useSelector((state) => state.userAuth);
+  const { isLoggingIn,authUser } = useSelector((state) => state.userAuth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(loginUser(formData));
   };
   console.clear()
+  if(authUser){
+    navigate("/")
+  }
   return (
     <div className="h-screen grid lg:grid-cols-2">
       {/* Left Side - Form */}
