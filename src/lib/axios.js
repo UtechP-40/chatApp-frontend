@@ -26,7 +26,7 @@ const clearTokens = () => {
 };
 
 // Axios instance
-export const axiosInstance = axios.create({
+const axiosInstance = axios.create({
     baseURL: BASE_URL,
     withCredentials: true, // Needed for cookies/session management
 });
@@ -84,3 +84,4 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+export {axiosInstance}

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { THEMES } from "../constants";
-// import { useThemeStore } from "../store/useThemeStore";
 import { Send } from "lucide-react";
 import { setTheme } from "../redux/features/userThemeSlice";
+import { useTranslation } from "react-i18next";
 
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
@@ -11,14 +11,15 @@ const PREVIEW_MESSAGES = [
 
 const SettingsPage = () => {
   const dispatch = useDispatch();
-  const { theme } = useSelector(state => state.userTheme);
-
+  const { theme } = useSelector((state) => state.userTheme);
+  const { t } = useTranslation();
+  console.clear()
   return (
     <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
-          <h2 className="text-lg font-semibold">Theme</h2>
-          <p className="text-sm text-base-content/70">Choose a theme for your chat interface</p>
+          <h2 className="text-lg font-semibold">{t("settings.themes.title")}</h2>
+          <p className="text-sm text-base-content/70">{t("settings.themes.description")}</p>
         </div>
 
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
@@ -47,7 +48,7 @@ const SettingsPage = () => {
         </div>
 
         {/* Preview Section */}
-        <h3 className="text-lg font-semibold mb-3">Preview</h3>
+        <h3 className="text-lg font-semibold mb-3">{t("settings.preview")}</h3>
         <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
           <div className="p-4 bg-base-200">
             <div className="max-w-lg mx-auto">
@@ -61,7 +62,7 @@ const SettingsPage = () => {
                     </div>
                     <div>
                       <h3 className="font-medium text-sm">John Doe</h3>
-                      <p className="text-xs text-base-content/70">Online</p>
+                      <p className="text-xs text-base-content/70">{t("settings.online")}</p>
                     </div>
                   </div>
                 </div>
@@ -99,7 +100,7 @@ const SettingsPage = () => {
                     <input
                       type="text"
                       className="input input-bordered flex-1 text-sm h-10"
-                      placeholder="Type a message..."
+                      placeholder={t("settings.typeMessage")}
                       value="This is a preview"
                       readOnly
                     />

@@ -1,23 +1,46 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+
 import { getFriends, setSelectedUser } from '../redux/features/friendsSlice';
+import { updateOnlineFriends } from '../redux/features/userAuthSlice';
 import { Users } from "lucide-react";
 import SidebarSkeleton from './skeletons/SidebarSkeleton';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { users, isUsersLoading, selectedUser } = useSelector((state) => state.friends);
-  const { onlineUsers } = useSelector((state) => state.userAuth);
+  const { onlineUsers,socket } = useSelector((state) => state.userAuth);
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
-console.log(users);
-  useEffect(() => {
+  
+  useEffect(()=> {
     dispatch(getFriends());
   }, [dispatch]);
 
-  const filteredUsers = showOnlineOnly 
-    ? users.filter((user) => onlineUsers.includes(user?._id)) 
-    : users;
+  useEffect(() => {
+    if (!socket) return; 
 
+    const handleOnlineUsers = (onlineUserIds) => {
+      // console.log("Online Friends:", onlineUserIds);
+      dispatch(updateOnlineFriends(onlineUserIds))
+    };
+
+    socket.on("getOnlineUsers", handleOnlineUsers);
+
+    return () => {
+      socket.off("getOnlineUsers", handleOnlineUsers);
+    };
+  }, [socket,dispatch]); 
+
+  // console.log(onlineUsers,"onlineUsers")
+  const filteredUsers = showOnlineOnly 
+    ? users.filter((user) => {
+      // console.log(user.friend._id,onlineUsers)
+      return onlineUsers.includes(user?.friend._id)}) 
+    : users;
+    console.clear()
   if (isUsersLoading) {
     return <SidebarSkeleton />;
   }
@@ -27,7 +50,7 @@ console.log(users);
       <div className="border-b border-base-300 w-full p-5">
         <div className="flex items-center gap-2">
           <Users className="size-6" />
-          <span className="font-medium hidden lg:block">Contacts</span>
+          <span className="font-medium hidden lg:block">{t('sidebar.contacts')}</span>
         </div>
 
         {/* Online filter toggle */}
@@ -39,9 +62,9 @@ console.log(users);
               onChange={(e) => setShowOnlineOnly(e.target.checked)}
               className="checkbox checkbox-sm"
             />
-            <span className="text-sm">Show online only</span>
+            <span className="text-sm">{t('sidebar.showOnlineOnly')}</span>
           </label>
-          <span className="text-xs text-zinc-500">({onlineUsers.length - 1} online)</span>
+          <span className="text-xs text-zinc-500">({onlineUsers.length-1} {t('sidebar.online')})</span>
         </div>
       </div>
 
@@ -57,7 +80,7 @@ console.log(users);
                 ${selectedUser?._id === user.friend?._id ? "bg-base-300 ring-1 ring-base-300" : ""}
               `}
             >
-              <div onClick={()=>console.log(user)} className="relative mx-auto lg:mx-0">
+              <div className="relative mx-auto lg:mx-0">
                 <img
                   src={user.friend?.profilePicture || "/avatar.jpg"}
                   alt={user.friend?.name || "User"}
@@ -75,14 +98,14 @@ console.log(users);
               <div className="hidden lg:block text-left min-w-0">
                 <div className="font-medium truncate">{user.friend?.fullName}</div>
                 <div className="text-sm text-zinc-400">
-                  {onlineUsers.includes(user.friend?._id) ? "Online" : "Offline"}
+                  {onlineUsers.includes(user.friend?._id) ? t('sidebar.online') : t('sidebar.offline')}
                 </div>
               </div>
             </button>
           ))
         ) : (
           <div className="text-center text-zinc-500 py-4">
-            {showOnlineOnly ? "No online users" : "No users available"}
+            {showOnlineOnly ? t('sidebar.noOnlineUsers') : t('sidebar.noUsersAvailable')}
           </div>
         )}
       </div>

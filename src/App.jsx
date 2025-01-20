@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import Navbar from './Components/Navbar';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { checkAuth, connectSocket, disconnectSocket } from './redux/features/userAuthSlice';
+import { checkAuth, connectSocket, disconnectSocket,updateOnlineFriends } from './redux/features/userAuthSlice';
 import { Toaster } from 'react-hot-toast';
 import { Loader } from "lucide-react";
-
+import { useTranslation } from 'react-i18next'; 
 // Pages
 import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
@@ -23,15 +23,20 @@ import ProfilePage from './pages/ProfilePage';
 import Search from './pages/Search';
 
 const App = () => {
+  const { i18n } = useTranslation(); 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authUser, isCheckingAuth } = useSelector(store => store.userAuth);
+  const { authUser, isCheckingAuth,selectedLanguage,socket } = useSelector(store => store.userAuth);
   const { theme } = useSelector(store => store.userTheme);
-
+  // const {authUser} = useSelector(state=>state.userAuth)
   useEffect(() => {
+    
     dispatch(checkAuth());
     dispatch(connectSocket());
-
+    // i18n.changeLanguage(selectedLanguage.toLowerCase());
+    // if(!authUser){
+    //   return
+    // }
     return () => {
       dispatch(disconnectSocket());
     };

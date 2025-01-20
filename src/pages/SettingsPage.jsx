@@ -1,65 +1,61 @@
 import React from "react";
-import { Moon,Languages, Users, Lock, Bell, Download, HelpCircle, Eye } from "lucide-react";
+import { Moon, Languages, Users, Lock, Bell, Download, HelpCircle, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const SettingsPage = () => {
+const Settings = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
-{/* <Languages /> */}
+
   const options = [
     {
-      title: "Themes",
-      description: "Customize the look and feel of the app.",
+      title: t("settings.themes.title"),
+      description: t("settings.themes.description"),
       icon: <Moon className="text-primary" />,
       route: "/settings/theme",
     },
     {
-      title: "Language",
-      description: "Customize your language prefrence.",
+      title: t("settings.language.title"),
+      description: t("settings.language.description"),
       icon: <Languages className="text-primary" />,
       route: "/settings/language",
     },
-    // {
-    //   title: "Manage Friends",
-    //   description: "View and manage your friends list.",
-    //   icon: <Users className="text-primary" />,
-    //   route: "/settings/friends",
-    // },
     {
-      title: "Privacy Settings",
-      description: "Control your privacy preferences.",
+      title: t("settings.privacy.title"),
+      description: t("settings.privacy.description"),
       icon: <Lock className="text-primary" />,
       route: "/settings/privacy",
     },
     {
-      title: "Notifications",
-      description: "Set up your notification preferences.",
+      title: t("settings.notifications.title"),
+      description: t("settings.notifications.description"),
       icon: <Bell className="text-primary" />,
       route: "/settings/notifications",
     },
     {
-      title: "Download Data",
-      description: "Request a copy of your personal data.",
+      title: t("settings.download.title"),
+      description: t("settings.download.description"),
       icon: <Download className="text-primary" />,
       route: "/settings/download-data",
     },
     {
-      title: "Help & Support",
-      description: "Access FAQs or contact support.",
+      title: t("settings.help.title"),
+      description: t("settings.help.description"),
       icon: <HelpCircle className="text-primary" />,
       route: "/settings/help",
     },
     {
-      title: "Accessibility",
-      description: "Adjust settings for better accessibility.",
+      title: t("settings.accessibility.title"),
+      description: t("settings.accessibility.description"),
       icon: <Eye className="text-primary" />,
       route: "/settings/accessibility",
     },
   ];
-
+  console.clear()
   return (
     <div className="min-h-screen bg-base-200 flex flex-col items-center py-8 px-4">
       {/* Page Title */}
-      <h1 className="text-2xl font-bold mb-6">Settings</h1>
+      <h1 className="text-2xl font-bold mb-6">{t("settings.title")}</h1>
 
       {/* Settings Options */}
       <div className="w-full max-w-3xl space-y-4">
@@ -81,4 +77,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default Settings;

@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, UserPlus } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import SidebarSkeleton from "../Components/skeletons/SidebarSkeleton";
 import { fetchSearchedUsers, addFriend } from "../redux/features/otherSlice";
 import SearchSkeleton from "../Components/skeletons/SearchSkeleton";
+import { useTranslation } from "react-i18next";
 
 const SearchComponent = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { searchedUsers, isLoading } = useSelector((state) => state.other);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
 
-  const handleSearch = () => {
-    if (searchQuery.trim() === "") return;
-    dispatch(fetchSearchedUsers(searchQuery));
-  };
+  // Debounce logic
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 300); // 300ms debounce delay
 
+    return () => {
+      clearTimeout(handler); // Clear timeout on query change
+    };
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (debouncedQuery.trim() !== "") {
+      dispatch(fetchSearchedUsers(debouncedQuery));
+    }
+  }, [debouncedQuery, dispatch]);
+console.clear()
   return (
     <div className="h-screen bg-base-200">
       <div className="flex items-center justify-center pt-20 px-4">
@@ -23,15 +38,12 @@ const SearchComponent = () => {
             {/* Search Bar */}
             <form
               className="flex items-center gap-2 px-4 py-6 border-b border-base-300 bg-base-100"
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSearch();
-              }}
+              onSubmit={(e) => e.preventDefault()} // Prevent default form submission
             >
               <input
                 type="text"
                 className="flex-1 input input-bordered rounded-lg input-sm sm:input-md"
-                placeholder="Search for users..."
+                placeholder={t("searchUsers")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -40,7 +52,7 @@ const SearchComponent = () => {
                 className="btn btn-primary btn-sm sm:btn-md flex items-center gap-2"
               >
                 <Search size={18} />
-                <span className="hidden sm:block">Search</span>
+                <span className="hidden sm:block">{t("search")}</span>
               </button>
             </form>
 
@@ -67,7 +79,7 @@ const SearchComponent = () => {
                         />
                         <div className="text-left">
                           <div className="font-medium truncate">{user.fullName}</div>
-                          <div className="text-sm text-zinc-400">{user.email || "No email provided"}</div>
+                          <div className="text-sm text-zinc-400">{user.email || t("noEmailProvided")}</div>
                         </div>
                       </div>
 
@@ -87,7 +99,7 @@ const SearchComponent = () => {
             {/* Empty State */}
             {!isLoading && searchedUsers.length === 0 && searchQuery && (
               <div className="flex-1 flex items-center justify-center text-zinc-500">
-                No users found.
+                {t("nuserf")}
               </div>
             )}
           </div>

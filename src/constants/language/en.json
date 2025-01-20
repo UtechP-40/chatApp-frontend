@@ -1,0 +1,930 @@
+{
+    "en":{
+    "settings": {
+    "title": "Settings",
+    "themes": {
+      "title": "Themes",
+      "description": "Customize the look and feel of the app."
+    },
+    "language": {
+      "title": "Language",
+      "description": "Customize your language preference."
+    },
+    "privacy": {
+      "title": "Privacy Settings",
+      "description": "Control your privacy preferences."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Set up your notification preferences."
+    },
+    "download": {
+      "title": "Download Data",
+      "description": "Request a copy of your personal data."
+    },
+    "help": {
+      "title": "Help & Support",
+      "description": "Access FAQs or contact support."
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "description": "Adjust settings for better accessibility."
+    },
+    "preview": "Preview",
+    "online": "Online",
+    "typeMessage": "Type a message..."
+  },
+    "hello": "Hello",
+      "welcome": "Welcome",
+      "selectLanguage": "Select Language",
+      "goodbye": "Goodbye",
+      "thankYou": "Thank you",
+      "chitChat":"ChitChat",
+      "search":"Search",
+      "friends":"Friends",
+      "contacts": "Contacts",
+      "nuserf":"No users found.",
+  "showOnlineOnly": "Show online only",
+  "noOnlineUsers": "No online users",
+  "noUsersAvailable": "No users available",
+  "errorLoadingUsers": "Error loading users",
+  "defaultUserName": "User",
+  "login": {
+    "welcome": "Welcome Back",
+    "sign_in_prompt": "Sign in to your account",
+    "email_label": "Email",
+    "email_placeholder": "you@example.com",
+    "password_label": "Password",
+    "password_placeholder": "••••••••",
+    "loading": "Loading...",
+    "sign_in_button": "Sign in",
+    "no_account_prompt": "Don't have an account?",
+    "create_account": "Create account",
+    "image_title": "Welcome back!",
+    "image_subtitle": "Sign in to continue your conversations and catch up with your messages."
+  },
+  "manageFriends": {
+    "title": "Manage Friends",
+    "menuOptions": "Options",
+    "removeFriend": "Remove Friend",
+    "chatWithUser": "Chat with User"
+  },
+  "profilePage": {
+    "title": "Profile",
+    "subtitle": "Your profile information",
+    "profileImageAlt": "Profile Image",
+    "uploading": "Uploading...",
+    "updatePhoto": "Click the camera icon to update your photo",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "accountInfoTitle": "Account Information",
+    "memberSince": "Member Since",
+    "accountStatus": "Account Status",
+    "active": "Active",
+    "imageUploadError": "Error uploading image"
+  },
+  "signUpPage": {
+    "title": "Create Account",
+    "subtitle": "Get started with your free account",
+    "fullName": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "placeholders": {
+      "fullName": "John Doe",
+      "email": "you@example.com",
+      "password": "••••••••"
+    },
+    "submit": "Create Account",
+    "loading": "Loading...",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "imagePatternTitle": "Join our community",
+    "imagePatternSubtitle": "Connect with friends, share moments, and stay in touch with your loved ones.",
+    "errors": {
+      "fullNameRequired": "Full name is required",
+      "emailRequired": "Email is required",
+      "invalidEmailFormat": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters"
+    }
+  },
+  "messageInput": {
+    "selectImageError": "Please select an image file",
+    "typeMessage": "Type a message..."
+  },
+  "navbar": {
+    "chitChat": "Chit Chat",
+    "search": "Search",
+    "friends": "Friends",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "sidebar": {
+    "contacts": "Contacts",
+    "showOnlineOnly": "Show online only",
+    "online": "online",
+    "offline": "offline",
+    "noOnlineUsers": "No online users",
+    "noUsersAvailable": "No users available"
+  },
+  "noChat": {
+      "iconAriaLabel": "Message Icon",
+      "title": "Welcome to ChitChat!",
+      "description": "Select a conversation from the sidebar to start chatting"
+    }
+  },
+  
+    "es": {
+      "settings": {
+        "title": "Configuración",
+        "themes": { "title": "Temas", "description": "Personaliza el aspecto de la aplicación." },
+        "language": { "title": "Idioma", "description": "Personaliza tu preferencia de idioma." },
+        "privacy": { "title": "Configuración de privacidad", "description": "Controla tus preferencias de privacidad." },
+        "notifications": { "title": "Notificaciones", "description": "Configura tus preferencias de notificación." },
+        "download": { "title": "Descargar datos", "description": "Solicita una copia de tus datos personales." },
+        "help": { "title": "Ayuda y soporte", "description": "Accede a preguntas frecuentes o contacta con el soporte." },
+        "accessibility": { "title": "Accesibilidad", "description": "Ajusta la configuración para una mejor accesibilidad." },
+        "preview": "Vista previa",
+        "online": "En línea",
+        "typeMessage": "Escribe un mensaje..."
+      },
+      "hello": "Hola",
+      "welcome": "Bienvenido",
+      "selectLanguage": "Seleccionar idioma",
+      "goodbye": "Adiós",
+      "thankYou": "Gracias",
+      "chitChat": "ChitChat",
+      "search": "Buscar",
+      "friends": "Amigos",
+      "contacts": "Contactos",
+      "nuserf": "No se encontraron usuarios.",
+      "showOnlineOnly": "Mostrar solo en línea",
+      "noOnlineUsers": "No hay usuarios en línea",
+      "noUsersAvailable": "No hay usuarios disponibles",
+      "errorLoadingUsers": "Error al cargar los usuarios",
+      "defaultUserName": "Usuario",
+      "login": {
+        "welcome": "Bienvenido de nuevo",
+        "sign_in_prompt": "Inicia sesión en tu cuenta",
+        "email_label": "Correo electrónico",
+        "email_placeholder": "tucorreo@ejemplo.com",
+        "password_label": "Contraseña",
+        "password_placeholder": "••••••••",
+        "loading": "Cargando...",
+        "sign_in_button": "Iniciar sesión",
+        "no_account_prompt": "¿No tienes una cuenta?",
+        "create_account": "Crear cuenta",
+        "image_title": "¡Bienvenido de nuevo!",
+        "image_subtitle": "Inicia sesión para continuar tus conversaciones y ponerte al día con tus mensajes."
+      },
+      "manageFriends": {
+        "title": "Administrar amigos",
+        "menuOptions": "Opciones",
+        "removeFriend": "Eliminar amigo",
+        "chatWithUser": "Chatear con usuario"
+      },
+      "profilePage": {
+        "title": "Perfil",
+        "subtitle": "Tu información de perfil",
+        "profileImageAlt": "Imagen de perfil",
+        "uploading": "Subiendo...",
+        "updatePhoto": "Haz clic en el ícono de la cámara para actualizar tu foto",
+        "fullName": "Nombre completo",
+        "email": "Correo electrónico",
+        "accountInfoTitle": "Información de la cuenta",
+        "memberSince": "Miembro desde",
+        "accountStatus": "Estado de la cuenta",
+        "active": "Activo",
+        "imageUploadError": "Error al subir la imagen"
+      },
+      "signUpPage": {
+        "title": "Crear cuenta",
+        "subtitle": "Comienza con tu cuenta gratuita",
+        "fullName": "Nombre completo",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "placeholders": {
+          "fullName": "Juan Pérez",
+          "email": "tucorreo@ejemplo.com",
+          "password": "••••••••"
+        },
+        "submit": "Crear cuenta",
+        "loading": "Cargando...",
+        "haveAccount": "¿Ya tienes una cuenta?",
+        "signIn": "Iniciar sesión",
+        "imagePatternTitle": "Únete a nuestra comunidad",
+        "imagePatternSubtitle": "Conéctate con amigos, comparte momentos y mantente en contacto con tus seres queridos.",
+        "errors": {
+          "fullNameRequired": "Se requiere el nombre completo",
+          "emailRequired": "Se requiere el correo electrónico",
+          "invalidEmailFormat": "Formato de correo electrónico inválido",
+          "passwordRequired": "Se requiere la contraseña",
+          "passwordMinLength": "La contraseña debe tener al menos 6 caracteres"
+        }
+      },
+      "messageInput": {
+        "selectImageError": "Por favor, selecciona un archivo de imagen",
+        "typeMessage": "Escribe un mensaje..."
+      },
+      "navbar": {
+        "chitChat": "Chit Chat",
+        "search": "Buscar",
+        "friends": "Amigos",
+        "settings": "Configuración",
+        "profile": "Perfil",
+        "logout": "Cerrar sesión"
+      },
+      "sidebar": {
+        "contacts": "Contactos",
+        "showOnlineOnly": "Mostrar solo en línea",
+        "online": "en línea",
+        "offline": "fuera de línea",
+        "noOnlineUsers": "No hay usuarios en línea",
+        "noUsersAvailable": "No hay usuarios disponibles"
+      }
+    },
+    
+        "fr": {
+          "settings": {
+            "title": "Paramètres",
+            "themes": { "title": "Thèmes", "description": "Personnalisez l'apparence de l'application." },
+            "language": { "title": "Langue", "description": "Personnalisez votre préférence linguistique." },
+            "privacy": { "title": "Paramètres de confidentialité", "description": "Contrôlez vos préférences de confidentialité." },
+            "notifications": { "title": "Notifications", "description": "Définissez vos préférences de notifications." },
+            "download": { "title": "Télécharger les données", "description": "Demandez une copie de vos données personnelles." },
+            "help": { "title": "Aide & Support", "description": "Accédez aux questions fréquentes ou contactez le support." },
+            "accessibility": { "title": "Accessibilité", "description": "Ajustez les paramètres pour une meilleure accessibilité." },
+            "preview": "Aperçu",
+            "online": "En ligne",
+            "typeMessage": "Tapez un message..."
+          },
+          "hello": "Bonjour",
+          "welcome": "Bienvenue",
+          "selectLanguage": "Sélectionner la langue",
+          "goodbye": "Au revoir",
+          "thankYou": "Merci",
+          "chitChat": "ChitChat",
+          "search": "Recherche",
+          "friends": "Amis",
+          "contacts": "Contacts",
+          "nuserf": "Aucun utilisateur trouvé.",
+          "showOnlineOnly": "Afficher uniquement en ligne",
+          "noOnlineUsers": "Aucun utilisateur en ligne",
+          "noUsersAvailable": "Aucun utilisateur disponible",
+          "errorLoadingUsers": "Erreur lors du chargement des utilisateurs",
+          "defaultUserName": "Utilisateur",
+          "login": {
+            "welcome": "Content de vous revoir",
+            "sign_in_prompt": "Connectez-vous à votre compte",
+            "email_label": "Email",
+            "email_placeholder": "vous@exemple.com",
+            "password_label": "Mot de passe",
+            "password_placeholder": "••••••••",
+            "loading": "Chargement...",
+            "sign_in_button": "Se connecter",
+            "no_account_prompt": "Vous n'avez pas de compte ?",
+            "create_account": "Créer un compte",
+            "image_title": "Content de vous revoir !",
+            "image_subtitle": "Connectez-vous pour continuer vos conversations et rattraper vos messages."
+          },
+          "manageFriends": {
+            "title": "Gérer les amis",
+            "menuOptions": "Options",
+            "removeFriend": "Supprimer l'ami",
+            "chatWithUser": "Discuter avec l'utilisateur"
+          },
+          "profilePage": {
+            "title": "Profil",
+            "subtitle": "Informations sur votre profil",
+            "profileImageAlt": "Image de profil",
+            "uploading": "Téléchargement...",
+            "updatePhoto": "Cliquez sur l'icône de la caméra pour mettre à jour votre photo",
+            "fullName": "Nom complet",
+            "email": "Adresse e-mail",
+            "accountInfoTitle": "Informations sur le compte",
+            "memberSince": "Membre depuis",
+            "accountStatus": "État du compte",
+            "active": "Actif",
+            "imageUploadError": "Erreur lors du téléchargement de l'image"
+          },
+          "signUpPage": {
+            "title": "Créer un compte",
+            "subtitle": "Commencez avec votre compte gratuit",
+            "fullName": "Nom complet",
+            "email": "Email",
+            "password": "Mot de passe",
+            "placeholders": {
+              "fullName": "Jean Dupont",
+              "email": "vous@exemple.com",
+              "password": "••••••••"
+            },
+            "submit": "Créer un compte",
+            "loading": "Chargement...",
+            "haveAccount": "Vous avez déjà un compte ?",
+            "signIn": "Se connecter",
+            "imagePatternTitle": "Rejoignez notre communauté",
+            "imagePatternSubtitle": "Connectez-vous avec vos amis, partagez des moments et restez en contact avec vos proches.",
+            "errors": {
+              "fullNameRequired": "Le nom complet est requis",
+              "emailRequired": "L'email est requis",
+              "invalidEmailFormat": "Format d'email invalide",
+              "passwordRequired": "Le mot de passe est requis",
+              "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères"
+            }
+          },
+          "messageInput": {
+            "selectImageError": "Veuillez sélectionner un fichier image",
+            "typeMessage": "Tapez un message..."
+          },
+          "navbar": {
+            "chitChat": "Chit Chat",
+            "search": "Recherche",
+            "friends": "Amis",
+            "settings": "Paramètres",
+            "profile": "Profil",
+            "logout": "Se déconnecter"
+          },
+          "sidebar": {
+            "contacts": "Contacts",
+            "showOnlineOnly": "Afficher uniquement en ligne",
+            "online": "en ligne",
+            "offline": "hors ligne",
+            "noOnlineUsers": "Aucun utilisateur en ligne",
+            "noUsersAvailable": "Aucun utilisateur disponible"
+          }
+        },
+    "de": {
+    "settings": {
+      "title": "Einstellungen",
+      "themes": { "title": "Themen", "description": "Passen Sie das Aussehen der App an." },
+      "language": { "title": "Sprache", "description": "Passen Sie Ihre Spracheinstellungen an." },
+      "privacy": { "title": "Datenschutzeinstellungen", "description": "Steuern Sie Ihre Datenschutzeinstellungen." },
+      "notifications": { "title": "Benachrichtigungen", "description": "Stellen Sie Ihre Benachrichtigungseinstellungen ein." },
+      "download": { "title": "Daten herunterladen", "description": "Fordern Sie eine Kopie Ihrer persönlichen Daten an." },
+      "help": { "title": "Hilfe & Support", "description": "Greifen Sie auf häufig gestellte Fragen zu oder kontaktieren Sie den Support." },
+      "accessibility": { "title": "Barrierefreiheit", "description": "Passen Sie die Einstellungen für bessere Barrierefreiheit an." },
+      "preview": "Vorschau",
+      "online": "Online",
+      "typeMessage": "Nachricht eingeben..."
+    },
+    "hello": "Hallo",
+    "welcome": "Willkommen",
+    "selectLanguage": "Sprache auswählen",
+    "goodbye": "Auf Wiedersehen",
+    "thankYou": "Danke",
+    "chitChat": "ChitChat",
+    "search": "Suchen",
+    "friends": "Freunde",
+    "contacts": "Kontakte",
+    "nuserf": "Keine Benutzer gefunden.",
+    "showOnlineOnly": "Nur Online anzeigen",
+    "noOnlineUsers": "Keine Online-Benutzer",
+    "noUsersAvailable": "Keine Benutzer verfügbar",
+    "errorLoadingUsers": "Fehler beim Laden der Benutzer",
+    "defaultUserName": "Benutzer",
+    "login": {
+      "welcome": "Willkommen zurück",
+      "sign_in_prompt": "Melden Sie sich bei Ihrem Konto an",
+      "email_label": "E-Mail",
+      "email_placeholder": "beispiel@domain.de",
+      "password_label": "Passwort",
+      "password_placeholder": "••••••••",
+      "loading": "Lädt...",
+      "sign_in_button": "Anmelden",
+      "no_account_prompt": "Haben Sie kein Konto?",
+      "create_account": "Konto erstellen",
+      "image_title": "Willkommen zurück!",
+      "image_subtitle": "Melden Sie sich an, um Ihre Gespräche fortzusetzen und Ihre Nachrichten nachzuholen."
+    },
+    "manageFriends": {
+      "title": "Freunde verwalten",
+      "menuOptions": "Optionen",
+      "removeFriend": "Freund entfernen",
+      "chatWithUser": "Mit Benutzer chatten"
+    },
+    "profilePage": {
+      "title": "Profil",
+      "subtitle": "Ihre Profilinformationen",
+      "profileImageAlt": "Profilbild",
+      "uploading": "Hochladen...",
+      "updatePhoto": "Klicken Sie auf das Kamera-Symbol, um Ihr Foto zu aktualisieren",
+      "fullName": "Vollständiger Name",
+      "email": "E-Mail-Adresse",
+      "accountInfoTitle": "Kontoinformationen",
+      "memberSince": "Mitglied seit",
+      "accountStatus": "Kontostatus",
+      "active": "Aktiv",
+      "imageUploadError": "Fehler beim Hochladen des Bildes"
+    },
+    "signUpPage": {
+      "title": "Konto erstellen",
+      "subtitle": "Starten Sie mit Ihrem kostenlosen Konto",
+      "fullName": "Vollständiger Name",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "placeholders": {
+        "fullName": "Max Mustermann",
+        "email": "beispiel@domain.de",
+        "password": "••••••••"
+      },
+      "submit": "Konto erstellen",
+      "loading": "Lädt...",
+      "haveAccount": "Haben Sie bereits ein Konto?",
+      "signIn": "Anmelden",
+      "imagePatternTitle": "Treten Sie unserer Gemeinschaft bei",
+      "imagePatternSubtitle": "Verbinden Sie sich mit Freunden, teilen Sie Momente und bleiben Sie in Kontakt mit Ihren Lieben.",
+      "errors": {
+        "fullNameRequired": "Vollständiger Name ist erforderlich",
+        "emailRequired": "E-Mail ist erforderlich",
+        "invalidEmailFormat": "Ungültiges E-Mail-Format",
+        "passwordRequired": "Passwort ist erforderlich",
+        "passwordMinLength": "Das Passwort muss mindestens 6 Zeichen enthalten"
+      }
+    },
+    "messageInput": {
+      "selectImageError": "Bitte wählen Sie eine Bilddatei aus",
+      "typeMessage": "Nachricht eingeben..."
+    },
+    "navbar": {
+      "chitChat": "Chit Chat",
+      "search": "Suchen",
+      "friends": "Freunde",
+      "settings": "Einstellungen",
+      "profile": "Profil",
+      "logout": "Abmelden"
+    },
+    "sidebar": {
+      "contacts": "Kontakte",
+      "showOnlineOnly": "Nur Online anzeigen",
+      "online": "online",
+      "offline": "offline",
+      "noOnlineUsers": "Keine Online-Benutzer",
+      "noUsersAvailable": "Keine Benutzer verfügbar"
+    }
+  },
+  "it": {
+    "settings": {
+      "title": "Impostazioni",
+      "themes": { "title": "Temi", "description": "Personalizza l'aspetto dell'app." },
+      "language": { "title": "Lingua", "description": "Personalizza le preferenze linguistiche." },
+      "privacy": { "title": "Impostazioni sulla privacy", "description": "Controlla le preferenze sulla privacy." },
+      "notifications": { "title": "Notifiche", "description": "Imposta le preferenze per le notifiche." },
+      "download": { "title": "Scarica i dati", "description": "Richiedi una copia dei tuoi dati personali." },
+      "help": { "title": "Aiuto & Supporto", "description": "Accedi alle FAQ o contatta il supporto." },
+      "accessibility": { "title": "Accessibilità", "description": "Regola le impostazioni per una migliore accessibilità." },
+      "preview": "Anteprima",
+      "online": "Online",
+      "typeMessage": "Scrivi un messaggio..."
+    },
+    "hello": "Ciao",
+    "welcome": "Benvenuto",
+    "selectLanguage": "Seleziona la lingua",
+    "goodbye": "Arrivederci",
+    "thankYou": "Grazie",
+    "chitChat": "ChitChat",
+    "search": "Cerca",
+    "friends": "Amici",
+    "contacts": "Contatti",
+    "nuserf": "Nessun utente trovato.",
+    "showOnlineOnly": "Mostra solo online",
+    "noOnlineUsers": "Nessun utente online",
+    "noUsersAvailable": "Nessun utente disponibile",
+    "errorLoadingUsers": "Errore nel caricare gli utenti",
+    "defaultUserName": "Utente",
+    "login": {
+      "welcome": "Bentornato",
+      "sign_in_prompt": "Accedi al tuo account",
+      "email_label": "Email",
+      "email_placeholder": "esempio@dominio.it",
+      "password_label": "Password",
+      "password_placeholder": "••••••••",
+      "loading": "Caricamento...",
+      "sign_in_button": "Accedi",
+      "no_account_prompt": "Non hai un account?",
+      "create_account": "Crea un account",
+      "image_title": "Bentornato!",
+      "image_subtitle": "Accedi per continuare le tue conversazioni e recuperare i tuoi messaggi."
+    },
+    "manageFriends": {
+      "title": "Gestisci amici",
+      "menuOptions": "Opzioni",
+      "removeFriend": "Rimuovi amico",
+      "chatWithUser": "Chatta con l'utente"
+    },
+    "profilePage": {
+      "title": "Profilo",
+      "subtitle": "Le tue informazioni del profilo",
+      "profileImageAlt": "Immagine del profilo",
+      "uploading": "Caricamento...",
+      "updatePhoto": "Clicca sull'icona della fotocamera per aggiornare la tua foto",
+      "fullName": "Nome completo",
+      "email": "Indirizzo email",
+      "accountInfoTitle": "Informazioni account",
+      "memberSince": "Membro dal",
+      "accountStatus": "Stato account",
+      "active": "Attivo",
+      "imageUploadError": "Errore nel caricare l'immagine"
+    },
+    "signUpPage": {
+      "title": "Crea un account",
+      "subtitle": "Inizia con il tuo account gratuito",
+      "fullName": "Nome completo",
+      "email": "Email",
+      "password": "Password",
+      "placeholders": {
+        "fullName": "Giovanni Rossi",
+        "email": "esempio@dominio.it",
+        "password": "••••••••"
+      },
+      "submit": "Crea account",
+      "loading": "Caricamento...",
+      "haveAccount": "Hai già un account?",
+      "signIn": "Accedi",
+      "imagePatternTitle": "Unisciti alla nostra comunità",
+      "imagePatternSubtitle": "Connettiti con gli amici, condividi momenti e rimani in contatto con i tuoi cari.",
+      "errors": {
+        "fullNameRequired": "Il nome completo è richiesto",
+        "emailRequired": "L'email è richiesta",
+        "invalidEmailFormat": "Formato email non valido",
+        "passwordRequired": "La password è richiesta",
+        "passwordMinLength": "La password deve contenere almeno 6 caratteri"
+      }
+    },
+    "messageInput": {
+      "selectImageError": "Seleziona un file immagine",
+      "typeMessage": "Scrivi un messaggio..."
+    },
+    "navbar": {
+      "chitChat": "Chit Chat",
+      "search": "Cerca",
+      "friends": "Amici",
+      "settings": "Impostazioni",
+      "profile": "Profilo",
+      "logout": "Esci"
+    },
+    "sidebar": {
+      "contacts": "Contatti",
+      "showOnlineOnly": "Mostra solo online",
+      "online": "online",
+      "offline": "offline",
+      "noOnlineUsers": "Nessun utente online",
+      "noUsersAvailable": "Nessun utente disponibile"
+    }
+  },
+  "pt": {
+    "settings": {
+      "title": "Configurações",
+      "themes": { "title": "Temas", "description": "Personalize a aparência do aplicativo." },
+      "language": { "title": "Idioma", "description": "Personalize suas preferências de idioma." },
+      "privacy": { "title": "Configurações de Privacidade", "description": "Controle suas preferências de privacidade." },
+      "notifications": { "title": "Notificações", "description": "Configure suas preferências de notificação." },
+      "download": { "title": "Baixar Dados", "description": "Solicite uma cópia dos seus dados pessoais." },
+      "help": { "title": "Ajuda & Suporte", "description": "Acesse as FAQs ou entre em contato com o suporte." },
+      "accessibility": { "title": "Acessibilidade", "description": "Ajuste as configurações para uma melhor acessibilidade." },
+      "preview": "Prévia",
+      "online": "Online",
+      "typeMessage": "Digite uma mensagem..."
+    },
+    "hello": "Olá",
+    "welcome": "Bem-vindo",
+    "selectLanguage": "Selecionar Idioma",
+    "goodbye": "Adeus",
+    "thankYou": "Obrigado",
+    "chitChat": "ChitChat",
+    "search": "Buscar",
+    "friends": "Amigos",
+    "contacts": "Contatos",
+    "nuserf": "Nenhum usuário encontrado.",
+    "showOnlineOnly": "Mostrar apenas online",
+    "noOnlineUsers": "Nenhum usuário online",
+    "noUsersAvailable": "Nenhum usuário disponível",
+    "errorLoadingUsers": "Erro ao carregar os usuários",
+    "defaultUserName": "Usuário",
+    "login": {
+      "welcome": "Bem-vindo de volta",
+      "sign_in_prompt": "Faça login na sua conta",
+      "email_label": "E-mail",
+      "email_placeholder": "você@exemplo.com",
+      "password_label": "Senha",
+      "password_placeholder": "••••••••",
+      "loading": "Carregando...",
+      "sign_in_button": "Entrar",
+      "no_account_prompt": "Não tem uma conta?",
+      "create_account": "Criar conta",
+      "image_title": "Bem-vindo de volta!",
+      "image_subtitle": "Faça login para continuar suas conversas e acompanhar suas mensagens."
+    },
+    "manageFriends": {
+      "title": "Gerenciar Amigos",
+      "menuOptions": "Opções",
+      "removeFriend": "Remover amigo",
+      "chatWithUser": "Conversar com o usuário"
+    },
+    "profilePage": {
+      "title": "Perfil",
+      "subtitle": "Suas informações de perfil",
+      "profileImageAlt": "Imagem do perfil",
+      "uploading": "Carregando...",
+      "updatePhoto": "Clique no ícone da câmera para atualizar sua foto",
+      "fullName": "Nome Completo",
+      "email": "Endereço de e-mail",
+      "accountInfoTitle": "Informações da Conta",
+      "memberSince": "Membro desde",
+      "accountStatus": "Status da conta",
+      "active": "Ativo",
+      "imageUploadError": "Erro ao carregar a imagem"
+    },
+    "signUpPage": {
+      "title": "Criar Conta",
+      "subtitle": "Comece com sua conta gratuita",
+      "fullName": "Nome Completo",
+      "email": "E-mail",
+      "password": "Senha",
+      "placeholders": {
+        "fullName": "João Silva",
+        "email": "você@exemplo.com",
+        "password": "••••••••"
+      },
+      "submit": "Criar Conta",
+      "loading": "Carregando...",
+      "haveAccount": "Já tem uma conta?",
+      "signIn": "Entrar",
+      "imagePatternTitle": "Junte-se à nossa comunidade",
+      "imagePatternSubtitle": "Conecte-se com amigos, compartilhe momentos e fique em contato com seus entes queridos.",
+      "errors": {
+        "fullNameRequired": "Nome completo é obrigatório",
+        "emailRequired": "E-mail é obrigatório",
+        "invalidEmailFormat": "Formato de e-mail inválido",
+        "passwordRequired": "Senha é obrigatória",
+        "passwordMinLength": "A senha deve ter pelo menos 6 caracteres"
+      }
+    },
+    "messageInput": {
+      "selectImageError": "Selecione um arquivo de imagem",
+      "typeMessage": "Digite uma mensagem..."
+    },
+    "navbar": {
+      "chitChat": "Chit Chat",
+      "search": "Buscar",
+      "friends": "Amigos",
+      "settings": "Configurações",
+      "profile": "Perfil",
+      "logout": "Sair"
+    },
+    "sidebar": {
+      "contacts": "Contatos",
+      "showOnlineOnly": "Mostrar apenas online",
+      "online": "online",
+      "offline": "offline",
+      "noOnlineUsers": "Nenhum usuário online",
+      "noUsersAvailable": "Nenhum usuário disponível"
+    }
+  },
+  "nl": {
+    "settings": {
+      "title": "Instellingen",
+      "themes": { "title": "Thema's", "description": "Pas het uiterlijk van de app aan." },
+      "language": { "title": "Taal", "description": "Pas je taalvoorkeuren aan." },
+      "privacy": { "title": "Privacy-instellingen", "description": "Beheer je privacy-instellingen." },
+      "notifications": { "title": "Meldingen", "description": "Stel je meldingsvoorkeuren in." },
+      "download": { "title": "Download Gegevens", "description": "Vraag een kopie van je persoonlijke gegevens aan." },
+      "help": { "title": "Hulp & Ondersteuning", "description": "Toegang tot FAQ's of neem contact op met ondersteuning." },
+      "accessibility": { "title": "Toegankelijkheid", "description": "Pas instellingen aan voor betere toegankelijkheid." },
+      "preview": "Voorbeeld",
+      "online": "Online",
+      "typeMessage": "Typ een bericht..."
+    },
+    "hello": "Hallo",
+    "welcome": "Welkom",
+    "selectLanguage": "Selecteer Taal",
+    "goodbye": "Tot ziens",
+    "thankYou": "Dank je",
+    "chitChat": "ChitChat",
+    "search": "Zoeken",
+    "friends": "Vrienden",
+    "contacts": "Contacten",
+    "nuserf": "Geen gebruikers gevonden.",
+    "showOnlineOnly": "Alleen online weergeven",
+    "noOnlineUsers": "Geen online gebruikers",
+    "noUsersAvailable": "Geen gebruikers beschikbaar",
+    "errorLoadingUsers": "Fout bij het laden van gebruikers",
+    "defaultUserName": "Gebruiker",
+    "login": {
+      "welcome": "Welkom terug",
+      "sign_in_prompt": "Log in op je account",
+      "email_label": "E-mail",
+      "email_placeholder": "jij@voorbeeld.com",
+      "password_label": "Wachtwoord",
+      "password_placeholder": "••••••••",
+      "loading": "Laden...",
+      "sign_in_button": "Inloggen",
+      "no_account_prompt": "Geen account?",
+      "create_account": "Account aanmaken",
+      "image_title": "Welkom terug!",
+      "image_subtitle": "Log in om je gesprekken voort te zetten en je berichten bij te werken."
+    },
+    "manageFriends": {
+      "title": "Beheer Vrienden",
+      "menuOptions": "Opties",
+      "removeFriend": "Verwijder Vriend",
+      "chatWithUser": "Chatten met gebruiker"
+    },
+    "profilePage": {
+      "title": "Profiel",
+      "subtitle": "Je profielinformatie",
+      "profileImageAlt": "Profielafbeelding",
+      "uploading": "Uploaden...",
+      "updatePhoto": "Klik op het camerapictogram om je foto bij te werken",
+      "fullName": "Volledige Naam",
+      "email": "E-mailadres",
+      "accountInfoTitle": "Accountinformatie",
+      "memberSince": "Lid sinds",
+      "accountStatus": "Accountstatus",
+      "active": "Actief",
+      "imageUploadError": "Fout bij het uploaden van de afbeelding"
+    },
+    "signUpPage": {
+      "title": "Account Aanmaken",
+      "subtitle": "Begin met je gratis account",
+      "fullName": "Volledige Naam",
+      "email": "E-mail",
+      "password": "Wachtwoord",
+      "placeholders": {
+        "fullName": "Jan Jansen",
+        "email": "jij@voorbeeld.com",
+        "password": "••••••••"
+      },
+      "submit": "Account Aanmaken",
+      "loading": "Laden...",
+      "haveAccount": "Heb je al een account?",
+      "signIn": "Inloggen",
+      "imagePatternTitle": "Sluit je aan bij onze gemeenschap",
+      "imagePatternSubtitle": "Verbind met vrienden, deel momenten en blijf in contact met je dierbaren.",
+      "errors": {
+        "fullNameRequired": "Volledige naam is verplicht",
+        "emailRequired": "E-mail is verplicht",
+        "invalidEmailFormat": "Ongeldig e-mailformaat",
+        "passwordRequired": "Wachtwoord is verplicht",
+        "passwordMinLength": "Wachtwoord moet minimaal 6 tekens bevatten"
+      }
+    },
+    "messageInput": {
+      "selectImageError": "Selecteer een afbeeldingsbestand",
+      "typeMessage": "Typ een bericht..."
+    },
+    "navbar": {
+      "chitChat": "Chit Chat",
+      "search": "Zoeken",
+      "friends": "Vrienden",
+      "settings": "Instellingen",
+      "profile": "Profiel",
+      "logout": "Uitloggen"
+    },
+    "sidebar": {
+      "contacts": "Contacten",
+      "showOnlineOnly": "Alleen online weergeven",
+      "online": "online",
+      "offline": "offline",
+      "noOnlineUsers": "Geen online gebruikers",
+      "noUsersAvailable": "Geen gebruikers beschikbaar"
+    }
+  },
+    "hi": {
+      "settings": {
+        "title": "सेटिंग्स",
+        "themes": {
+          "title": "थीम",
+          "description": "ऐप की लुक और फील को कस्टमाइज करें।"
+        },
+        "language": {
+          "title": "भाषा",
+          "description": "अपनी भाषा प्राथमिकताओं को कस्टमाइज करें।"
+        },
+        "privacy": {
+          "title": "गोपनीयता सेटिंग्स",
+          "description": "अपनी गोपनीयता प्राथमिकताओं को नियंत्रित करें।"
+        },
+        "notifications": {
+          "title": "सूचनाएं",
+          "description": "अपनी सूचनाओं की प्राथमिकताएँ सेट करें।"
+        },
+        "download": {
+          "title": "डेटा डाउनलोड करें",
+          "description": "अपने व्यक्तिगत डेटा की एक प्रति का अनुरोध करें।"
+        },
+        "help": {
+          "title": "मदद और समर्थन",
+          "description": "FAQ या समर्थन से संपर्क करें।"
+        },
+        "accessibility": {
+          "title": "सुलभता",
+          "description": "बेहतर सुलभता के लिए सेटिंग्स समायोजित करें।"
+        },
+        "preview": "पूर्वावलोकन",
+        "online": "ऑनलाइन",
+        "typeMessage": "एक संदेश टाइप करें..."
+      },
+      "hello": "नमस्ते",
+      "welcome": "स्वागत है",
+      "selectLanguage": "भाषा चयन करें",
+      "goodbye": "अलविदा",
+      "thankYou": "धन्यवाद",
+      "chitChat": "चिट चैट",
+      "search": "खोज",
+      "friends": "मित्र",
+      "contacts": "संपर्क",
+      "nuserf": "कोई उपयोगकर्ता नहीं मिला।",
+      "showOnlineOnly": "केवल ऑनलाइन दिखाएं",
+      "noOnlineUsers": "कोई ऑनलाइन उपयोगकर्ता नहीं हैं",
+      "noUsersAvailable": "कोई उपयोगकर्ता उपलब्ध नहीं हैं",
+      "errorLoadingUsers": "उपयोगकर्ताओं को लोड करने में त्रुटि",
+      "defaultUserName": "उपयोगकर्ता",
+      "login": {
+        "welcome": "स्वागत है",
+        "sign_in_prompt": "अपने खाते में साइन इन करें",
+        "email_label": "ईमेल",
+        "email_placeholder": "you@example.com",
+        "password_label": "पासवर्ड",
+        "password_placeholder": "••••••••",
+        "loading": "लोड हो रहा है...",
+        "sign_in_button": "साइन इन करें",
+        "no_account_prompt": "क्या आपका खाता नहीं है?",
+        "create_account": "खाता बनाएं",
+        "image_title": "स्वागत है!",
+        "image_subtitle": "अपनी बातचीत जारी रखने के लिए साइन इन करें और अपने संदेशों के साथ अपडेट रहें।"
+      },
+      "manageFriends": {
+        "title": "मित्रों को प्रबंधित करें",
+        "menuOptions": "विकल्प",
+        "removeFriend": "मित्र को हटा दें",
+        "chatWithUser": "उपयोगकर्ता से चैट करें"
+      },
+      "profilePage": {
+        "title": "प्रोफ़ाइल",
+        "subtitle": "आपकी प्रोफ़ाइल जानकारी",
+        "profileImageAlt": "प्रोफ़ाइल चित्र",
+        "uploading": "अपलोड हो रहा है...",
+        "updatePhoto": "अपनी तस्वीर अपडेट करने के लिए कैमरा आइकन पर क्लिक करें",
+        "fullName": "पूरा नाम",
+        "email": "ईमेल पता",
+        "accountInfoTitle": "खाता जानकारी",
+        "memberSince": "सदस्यता शुरू हुई",
+        "accountStatus": "खाता स्थिति",
+        "active": "सक्रिय",
+        "imageUploadError": "चित्र अपलोड करने में त्रुटि"
+      },
+      "signUpPage": {
+        "title": "खाता बनाएं",
+        "subtitle": "अपने मुफ्त खाते के साथ शुरुआत करें",
+        "fullName": "पूरा नाम",
+        "email": "ईमेल",
+        "password": "पासवर्ड",
+        "placeholders": {
+          "fullName": "जॉन डो",
+          "email": "you@example.com",
+          "password": "••••••••"
+        },
+        "submit": "खाता बनाएं",
+        "loading": "लोड हो रहा है...",
+        "haveAccount": "क्या आपका खाता है?",
+        "signIn": "साइन इन करें",
+        "imagePatternTitle": "हमारे समुदाय में शामिल हों",
+        "imagePatternSubtitle": "मित्रों से जुड़ें, क्षणों को साझा करें और अपने प्रियजनों से संपर्क में रहें।",
+        "errors": {
+          "fullNameRequired": "पूरा नाम आवश्यक है",
+          "emailRequired": "ईमेल आवश्यक है",
+          "invalidEmailFormat": "अमान्य ईमेल प्रारूप",
+          "passwordRequired": "पासवर्ड आवश्यक है",
+          "passwordMinLength": "पासवर्ड कम से कम 6 वर्णों का होना चाहिए"
+        }
+      },
+      "messageInput": {
+        "selectImageError": "कृपया एक चित्र फ़ाइल चुनें",
+        "typeMessage": "एक संदेश लिखें..."
+      },
+      "navbar": {
+        "chitChat": "चिट चैट",
+        "search": "खोज",
+        "friends": "मित्र",
+        "settings": "सेटिंग्स",
+        "profile": "प्रोफ़ाइल",
+        "logout": "लॉगआउट"
+      },
+      "sidebar": {
+        "contacts": "संपर्क",
+        "showOnlineOnly": "केवल ऑनलाइन दिखाएं",
+        "online": "ऑनलाइन",
+        "offline": "ऑफ़लाइन",
+        "noOnlineUsers": "कोई ऑनलाइन उपयोगकर्ता नहीं हैं",
+        "noUsersAvailable": "कोई उपयोगकर्ता उपलब्ध नहीं हैं"
+      }
+    }
+  
+
+      
+      
+  
+  
+}
+  

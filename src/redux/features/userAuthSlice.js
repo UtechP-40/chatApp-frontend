@@ -3,19 +3,15 @@ import { axiosInstance } from './../../lib/axios';
 import toast from 'react-hot-toast';
 import { io } from 'socket.io-client';
 
+// Constants
 const BASE_URL = import.meta.env.MODE === "development"
     ? "http://localhost:80"
     : import.meta.env.VITE_BASE_URL;
 
-const initialState = {
-    authUser: null,
-    isSigningUp: false,
-    isUpdatingProfile: false,
-    isLoggingIn: false,
-    isCheckingAuth: true,
-    onlineUsers: [],
-    socket: null
-};
+const SLICE_NAME = 'userAuth';
+
+// Utility Functions
+const getInitialLanguage = () => localStorage.getItem('i18nextLng') || 'en';
 
 const saveTokensToLocalStorage = (accessToken, refreshToken) => {
     localStorage.setItem('accessToken', accessToken);
@@ -27,8 +23,31 @@ const clearTokensFromLocalStorage = () => {
     localStorage.removeItem('refreshToken');
 };
 
+const saveLanguageToLocalStorage = (language) => {
+    localStorage.setItem('i18nextLng', language);
+};
+
+const handleApiError = (error) => {
+    const message = error.response?.data?.message || 'Something went wrong';
+    toast.error(message);
+    return message;
+};
+
+// Initial State
+const initialState = {
+    authUser: null,
+    isSigningUp: false,
+    isUpdatingProfile: false,
+    isLoggingIn: false,
+    isCheckingAuth: true,
+    onlineUsers: [],
+    socket: null,
+    selectedLanguage: getInitialLanguage(),
+};
+
+// Async Thunks
 export const loginUser = createAsyncThunk(
-    'userAuth/loginUser',
+    `${SLICE_NAME}/loginUser`,
     async (credentials, thunkAPI) => {
         try {
             const response = await axiosInstance.post('/auth/login', credentials);
@@ -37,29 +56,13 @@ export const loginUser = createAsyncThunk(
             toast.success(response.data.message);
             return user;
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Login failed');
-            return thunkAPI.rejectWithValue(error.response?.data?.message || 'Login failed');
-        }
-    }
-);
-
-export const logoutUser = createAsyncThunk(
-    'userAuth/logoutUser',
-    async (_, thunkAPI) => {
-        try {
-            const response = await axiosInstance.post('/auth/logout');
-            clearTokensFromLocalStorage();
-            toast.success(response.data.message);
-            return response.data;
-        } catch (error) {
-            toast.error(error.response?.data?.message || 'Logout failed');
-            return thunkAPI.rejectWithValue(error.response?.data?.message || 'Logout failed');
+            return thunkAPI.rejectWithValue(handleApiError(error));
         }
     }
 );
 
 export const signupUser = createAsyncThunk(
-    'userAuth/signupUser',
+    `${SLICE_NAME}/signupUser`,
     async (userDetails, thunkAPI) => {
         try {
             const response = await axiosInstance.post('/auth/signup', userDetails);
@@ -68,14 +71,26 @@ export const signupUser = createAsyncThunk(
             toast.success(response.data.message);
             return user;
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Signup failed');
-            return thunkAPI.rejectWithValue(error.response?.data?.message || 'Signup failed');
+            return thunkAPI.rejectWithValue(handleApiError(error));
+        }
+    }
+);
+
+export const updateProfile = createAsyncThunk(
+    `${SLICE_NAME}/updateProfile`,
+    async (profilePic, thunkAPI) => {
+        try {
+            const response = await axiosInstance.post('/auth/update-profile', profilePic);
+            toast.success(response.data.message);
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(handleApiError(error));
         }
     }
 );
 
 export const checkAuth = createAsyncThunk(
-    'userAuth/checkAuth',
+    `${SLICE_NAME}/checkAuth`,
     async (_, thunkAPI) => {
         try {
             const response = await axiosInstance.get('/auth/check-auth');
@@ -85,33 +100,35 @@ export const checkAuth = createAsyncThunk(
                 const refreshResponse = await axiosInstance.post('/auth/refresh-token');
                 const { accessToken, refreshToken } = refreshResponse.data.data;
                 saveTokensToLocalStorage(accessToken, refreshToken);
-
                 const retryResponse = await axiosInstance.get('/auth/check-auth');
                 return retryResponse.data.data;
             } catch (refreshError) {
                 clearTokensFromLocalStorage();
-                return thunkAPI.rejectWithValue(refreshError.response?.data?.message || 'Token refresh failed');
+                return thunkAPI.rejectWithValue(
+                    refreshError.response?.data?.message || 'Token refresh failed'
+                );
             }
         }
     }
 );
 
-export const updateProfile = createAsyncThunk(
-    'userAuth/updateProfile',
-    async (profilePic, thunkAPI) => {
+export const logoutUser = createAsyncThunk(
+    `${SLICE_NAME}/logoutUser`,
+    async (_, thunkAPI) => {
         try {
-            const response = await axiosInstance.post('/auth/update-profile', profilePic);
+            const response = await axiosInstance.post('/auth/logout');
+            clearTokensFromLocalStorage();
             toast.success(response.data.message);
             return response.data;
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Profile update failed');
-            return thunkAPI.rejectWithValue(error.response?.data?.message || 'Profile update failed');
+            return thunkAPI.rejectWithValue(handleApiError(error));
         }
     }
 );
 
+// Slice
 const userAuthSlice = createSlice({
-    name: 'userAuth',
+    name: SLICE_NAME,
     initialState,
     reducers: {
         logoutUserAction(state) {
@@ -119,7 +136,10 @@ const userAuthSlice = createSlice({
             state.isCheckingAuth = false;
             clearTokensFromLocalStorage();
         },
-        connectSocket(state) {
+        updateOnlineFriends(state, action) {
+            state.onlineUsers = action.payload;
+        },
+        connectSocket(state,action) {
             if (!state.authUser || state.socket?.connected) return;
             const socket = io(BASE_URL, {
                 query: {
@@ -127,16 +147,29 @@ const userAuthSlice = createSlice({
                 }
             });
             socket.connect();
-            socket.on("getOnlineUsers", (userIds) => {
-                state.onlineUsers = userIds;
-            });
             state.socket = socket;
+            // let x
+            // socket.on("getOnlineUsers", (onlineUserIds) => {
+            //     console.log("Online Friends:", onlineUserIds);
+            //     // action.asyncDispatch(updateOnlineFriends(onlineUserIds)); // Ensure this action is working
+            //     // const onlineUserSet = new Set(onlineUserIds);
+            //     // state.onlineUsers = onlineUserIds//
+            //     // x = onlineUserIds
+            //     action.dispatch(updateOnlineFriends(onlineUserIds))
+            // });
+            
+            // return {socket}
         },
         disconnectSocket(state) {
             if (state.socket?.connected) {
                 state.socket.disconnect();
+                state.socket = null; // Reset socket state
             }
-        }
+        },
+        setSelectedLanguage(state, action) {
+            state.selectedLanguage = action.payload;
+            saveLanguageToLocalStorage(action.payload);
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -198,9 +231,16 @@ const userAuthSlice = createSlice({
             .addCase(updateProfile.rejected, (state) => {
                 state.isUpdatingProfile = false;
             });
-    }
+    },
 });
 
-export const { logoutUserAction, connectSocket, disconnectSocket } = userAuthSlice.actions;
+// Export Actions and Reducer
+export const {
+    logoutUserAction,
+    connectSocket,
+    disconnectSocket,
+    setSelectedLanguage,
+    updateOnlineFriends,
+} = userAuthSlice.actions;
 
 export default userAuthSlice.reducer;

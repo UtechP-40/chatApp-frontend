@@ -32,9 +32,9 @@ export const getFriends = createAsyncThunk('chat/getFriends', async (_, thunkAPI
 });
 
 // Remove Friend
-export const removeFriend = createAsyncThunk('friend/removeFriend', async (friendId, thunkAPI) => {
+export const removeFriend = createAsyncThunk('friend/removeFriend', async ({friendId,email}, thunkAPI) => {
   try {
-    const response = await axiosInstance.delete(`/auth/remove-friend/${friendId}`, addAuthHeaders()); // Adjust endpoint
+    const response = await axiosInstance.post(`/auth/remove-friend`, {friendId,email}); // Adjust endpoint
     toast.success('Friend removed successfully');
     return friendId; // Return the friendId to remove it from the state
   } catch (error) {
