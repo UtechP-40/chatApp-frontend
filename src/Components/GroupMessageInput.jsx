@@ -1,17 +1,18 @@
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sendMessage } from "../redux/features/chatSlice";
+import { sendGroupMessage } from "../redux/features/groupSlice";
 import { toast } from "react-hot-toast";
 import { Image, Send, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const MessageInput = ({ replyTo, setReplyTo }) => {
+const GroupMessageInput = ({ replyTo, setReplyTo }) => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
-  const textAreaRef = useRef(null); // Ref for the textarea
+  const textAreaRef = useRef(null);
   const { authUser } = useSelector((store) => store.userAuth);
+  const { selectedGroup } = useSelector((store) => store.groups);
   const { t } = useTranslation();
 
   const handleImageChange = (e) => {
@@ -21,78 +22,83 @@ const MessageInput = ({ replyTo, setReplyTo }) => {
       return;
     }
     const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreview(reader.result);
-    };
+    reader.onloadend = () => setImagePreview(reader.result);
     reader.readAsDataURL(file);
   };
 
   const removeImage = () => {
     setImagePreview(null);
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    fileInputRef.current.value = "";
   };
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!text.trim() && !imagePreview) return;
-  
+
     try {
       await dispatch(
-        sendMessage({
-          text: text.trim(),
-          image: imagePreview,
-          replyTo:replyTo?._id || null, // include replyTo in the payload
+        sendGroupMessage({
+          groupId: selectedGroup._id,
+          messageData: {
+            text: text.trim(),
+            image: imagePreview,
+            replyTo: replyTo?._id || null,
+          }
         })
       );
-      console.log(replyTo)
-      // Reset after sending message
+
       setText("");
       setImagePreview(null);
-      setReplyTo(null);  // Reset the reply state after sending the message
+      setReplyTo(null);
+      if (textAreaRef.current) textAreaRef.current.style.height = "auto";
       if (fileInputRef.current) fileInputRef.current.value = "";
-      if (textAreaRef.current) {
-        textAreaRef.current.style.height = "auto"; // Reset height
-      }
     } catch (error) {
-      console.error("Failed to send message:", error);
+      console.error("Failed to send group message:", error);
     }
   };
-  
 
   const handleInputChange = (e) => {
     setText(e.target.value);
     if (textAreaRef.current) {
-      textAreaRef.current.style.height = "auto"; // Reset height before adjusting
-      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`; // Adjust height dynamically
+      textAreaRef.current.style.height = "auto";
+      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
     }
   };
-  // console.clear()
+console.log(replyTo);
   return (
     <div className="p-4 w-full">
       {replyTo && (
-        <div className="mb-2 p-2 bg-gray-100 rounded-lg border border-gray-300">
-          <p className="text-xs text-gray-600 italic">Replying to:</p>
-          <p className="text-sm">{replyTo.text || "Image"}</p>
+        <div className="mb-2 p-2 bg-blue-100 rounded-lg border border-blue-200">
+          <p className="text-xs text-blue-600 italic">
+            {replyTo.senderId === authUser._id
+              ? t("messageInput.replyingToYourself")
+              : t("messageInput.replyingTo", {
+                  name: replyTo.senderId?.fullName || t("common.unknownUser")
+                })}
+          </p>
+          <p className="text-sm text-gray-700">
+            {replyTo.text || t("messageInput.image")}
+          </p>
           <button
-            className="text-xs text-red-500 mt-1"
+            className="text-xs text-red-500 mt-1 hover:text-red-700"
             onClick={() => setReplyTo(null)}
-          >
-            Cancel
+          >Cancel
+            {/* {t("common.cancel")} */}
           </button>
         </div>
       )}
+
       {imagePreview && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
             <img
               src={imagePreview}
-              alt="Preview"
+              alt={t("messageInput.previewAlt")}
               className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
             />
             <button
               onClick={removeImage}
-              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-base-300
-              flex items-center justify-center"
+              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-base-300 flex items-center justify-center hover:bg-base-400 transition-colors"
               type="button"
             >
               <X className="size-3" />
@@ -103,21 +109,20 @@ const MessageInput = ({ replyTo, setReplyTo }) => {
 
       <form onSubmit={handleSendMessage} className="flex gap-2 items-end">
         <div className="flex-1 flex gap-2 items-end">
-          {/* Resizable Textarea */}
           <textarea
-            ref={textAreaRef} // Attach ref to the textarea
+            ref={textAreaRef}
             className="w-full input input-bordered rounded-lg input-sm sm:input-md resize-none"
             placeholder={t("messageInput.typeMessage")}
             value={text}
             onChange={handleInputChange}
             rows={1}
             style={{
-              minHeight: "40px", // Minimum height for a consistent look
-              maxHeight: "120px", // Maximum height
-              overflowY: text.length > 0 ? "auto" : "hidden", // Show scrollbar only when needed
+              minHeight: "40px",
+              maxHeight: "120px",
+              overflowY: text.length > 0 ? "auto" : "hidden",
             }}
           />
-          {/* File Upload Button */}
+          
           <input
             type="file"
             accept="image/*"
@@ -130,7 +135,7 @@ const MessageInput = ({ replyTo, setReplyTo }) => {
             type="button"
             className={`hidden sm:flex btn btn-circle ${
               imagePreview ? "text-emerald-500" : "text-zinc-400"
-            }`}
+            } hover:text-emerald-600`}
             onClick={() => fileInputRef.current?.click()}
           >
             <Image size={20} />
@@ -138,7 +143,7 @@ const MessageInput = ({ replyTo, setReplyTo }) => {
         </div>
         <button
           type="submit"
-          className="btn btn-circle"
+          className="btn btn-circle bg-primary hover:bg-primary-focus text-primary-content"
           disabled={!text.trim() && !imagePreview}
         >
           <Send size={23} />
@@ -148,4 +153,4 @@ const MessageInput = ({ replyTo, setReplyTo }) => {
   );
 };
 
-export default MessageInput;
+export default GroupMessageInput;

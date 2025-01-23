@@ -1,57 +1,59 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-
 import { getFriends, setSelectedUser } from '../redux/features/friendsSlice';
 import { updateOnlineFriends } from '../redux/features/userAuthSlice';
-import { Users } from "lucide-react";
+import { Users } from 'lucide-react';
 import SidebarSkeleton from './skeletons/SidebarSkeleton';
 import { useTranslation } from 'react-i18next';
 
-const Sidebar = () => {
+const Sidebar = ({sidebar,setSidebar}) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { users, isUsersLoading, selectedUser } = useSelector((state) => state.friends);
-  const { onlineUsers,socket } = useSelector((state) => state.userAuth);
+  const { onlineUsers, socket } = useSelector((state) => state.userAuth);
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
   
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(getFriends());
   }, [dispatch]);
 
   useEffect(() => {
-    if (!socket) return; 
+    if (!socket) return;
 
     const handleOnlineUsers = (onlineUserIds) => {
-      // console.log("Online Friends:", onlineUserIds);
-      dispatch(updateOnlineFriends(onlineUserIds))
+      dispatch(updateOnlineFriends(onlineUserIds));
     };
 
-    socket.on("getOnlineUsers", handleOnlineUsers);
+    socket.on('getOnlineUsers', handleOnlineUsers);
 
     return () => {
-      socket.off("getOnlineUsers", handleOnlineUsers);
+      socket.off('getOnlineUsers', handleOnlineUsers);
     };
-  }, [socket,dispatch]); 
+  }, [socket, dispatch]);
 
-  // console.log(onlineUsers,"onlineUsers")
+  // Create a copy of users to sort and avoid directly modifying the state
+  const sortedUsers = [...users]?.sort((a, b) => {
+    const lastInteractionA = a?.lastInteractionDate ? new Date(a?.lastInteractionDate) : 0;
+    const lastInteractionB = b?.lastInteractionDate ? new Date(b?.lastInteractionDate) : 0;
+    return lastInteractionB - lastInteractionA; // Sort in descending order
+  });
+
   const filteredUsers = showOnlineOnly 
-    ? users.filter((user) => {
-      // console.log(user.friend._id,onlineUsers)
-      return onlineUsers.includes(user?.friend._id)}) 
-    : users;
-    console.clear()
+    ? sortedUsers.filter((user) => onlineUsers.includes(user?.friend._id))
+    : sortedUsers;
+
   if (isUsersLoading) {
     return <SidebarSkeleton />;
   }
-
+  // {t('sidebar.group')}
+  console.log(filteredUsers)
   return (
     <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
       <div className="border-b border-base-300 w-full p-5">
-        <div className="flex items-center gap-2">
+        {sidebar && (<div className="flex hover:bg-base-300 w-36 p-2 rounded-md hover:cursor-pointer items-center gap-2" onClick={()=>setSidebar(x=>!x)}>
           <Users className="size-6" />
           <span className="font-medium hidden lg:block">{t('sidebar.contacts')}</span>
-        </div>
+        </div>)}
 
         {/* Online filter toggle */}
         <div className="mt-3 hidden lg:flex items-center gap-2">
@@ -64,8 +66,9 @@ const Sidebar = () => {
             />
             <span className="text-sm">{t('sidebar.showOnlineOnly')}</span>
           </label>
-          <span className="text-xs text-zinc-500">({onlineUsers.length-1} {t('sidebar.online')})</span>
+          <span className="text-xs text-zinc-500">({onlineUsers.length - 1} {t('sidebar.online')})</span>
         </div>
+        
       </div>
 
       <div className="overflow-y-auto w-full py-3">
@@ -112,5 +115,6 @@ const Sidebar = () => {
     </aside>
   );
 };
+
 
 export default Sidebar;

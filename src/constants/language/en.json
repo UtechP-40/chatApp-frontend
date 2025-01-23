@@ -110,7 +110,9 @@
   },
   "messageInput": {
     "selectImageError": "Please select an image file",
-    "typeMessage": "Type a message..."
+    "typeMessage": "Type a message...",
+    "noGroupSelected": "No group selected",
+    "previewAlt": "Image preview"
   },
   "navbar": {
     "chitChat": "Chit Chat",
@@ -120,13 +122,20 @@
     "profile": "Profile",
     "logout": "Logout"
   },
+  
   "sidebar": {
     "contacts": "Contacts",
+    "groups": "Groups",
+    "members": "members",
+    "noGroupsAvailable": "No groups available",
     "showOnlineOnly": "Show online only",
     "online": "online",
     "offline": "offline",
     "noOnlineUsers": "No online users",
-    "noUsersAvailable": "No users available"
+    "noUsersAvailable": "No users available",
+    "createGroup": "Create Group",
+    "members": "members",
+    "noGroupsAvailable": "No groups available"
   },
   "noChat": {
       "iconAriaLabel": "Message Icon",

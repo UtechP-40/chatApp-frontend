@@ -6,7 +6,7 @@ const ChatHeader = () => {
   const dispatch = useDispatch()
   const {selectedUser} = useSelector(store=>store.friends)
   const {onlineUsers} = useSelector(store=>store.userAuth)
-  console.clear()
+  // console.clear()
   return (
     <div className="p-2.5 border-b border-base-300">
       <div className="flex items-center justify-between">

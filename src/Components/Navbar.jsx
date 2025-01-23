@@ -8,7 +8,7 @@ function Navbar() {
   const { i18n } = useTranslation(); 
   const dispatch = useDispatch();
   const { authUser } = useSelector(store => store.userAuth);
-  console.clear()
+  // console.clear()
   return (
     <header
       className="bg-base-100 border-b border-base-300 fixed w-full top-0 z-40 

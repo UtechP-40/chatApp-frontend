@@ -6,13 +6,15 @@ import userThemeReducer from './features/userThemeSlice';
 import chatSlice from './features/chatSlice';
 // import friendSlice from "./features/friendsSlice"
 import friendSlice from './features/friendsSlice';
+import groupSlice from "./features/groupSlice"
 const store = configureStore({
     reducer: {
         userAuth: userAuthReducer,
         userTheme: userThemeReducer,
         chat: chatSlice,
         other:otherSlice,
-        friends:friendSlice
+        friends:friendSlice,
+        groups:groupSlice
     }
 });
 
